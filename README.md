@@ -1,43 +1,103 @@
-1. Tech Stack Choice
+# Store Rating System
 
-Since they give freedom:
+## Tech Stack
 
-Backend → Express.js (simplest for quick prototyping).
+- **Backend**: Express.js
+- **Database**: PostgreSQL
+- **Frontend**: React.js with Tailwind CSS
 
-Database → PostgreSQL (cleaner schema design, better JSON support if needed).
+## Database Schema
 
-Frontend → React.js with Tailwind css for quick tables & forms.
+### Users Table
+```sql
+users (id, name, email, password, address, role)
+```
 
-2. Database Schema 
+### Stores Table
+```sql
+stores (id, name, email, address, owner_id, avg_rating)
+```
 
-rating_app=# select * from users;
- id |         name         |           email           |            password             |        address        |    role
+### Ratings Table
+```sql
+ratings (id, store_id, user_id, rating)
+```
 
-rating_app=# select * from stores;
- id |         name         |       email       |                           address                           | owner_id | avg_rating
+## Project Setup
 
-rating_app=# select * from ratings;
- id | store_id | user_id | rating
+### Backend Setup (Port 5000)  http://localhost:5000      
+```bash
+cd server
+npm install
+npm start
+```
 
-3. Auth Flow
+### Frontend Setup (Port 3000)  http://localhost:3000      
+```bash
+cd client
+npm install
+npm start
+```
 
-JWT-based login system (one table users for everyone).
-On login → check role to decide dashboard.
-Passwords stored hashed (bcrypt).
-4. Functionalities Breakdown
+## Authentication
 
-System Administrator -
+- JWT-based authentication system
+- Role-based access control
+- Bcrypt password hashing
 
-Add stores (assign owner if needed).
-Add users (Normal/Admin).
-Dashboard:
-Total users, total stores, total ratings (simple aggregate queries).
-List of stores with ratings:
-Avg rating = AVG(rating) from ratings.
-List of users with filters (name/email/address/role).
-View user details (if store owner → include their avg store rating).
-Sorting on tables.
-<img src="https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/adminhome.png?raw=true" alt="Admin Home" width="500"/>
-<img src="https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/userAdminDash.png?raw=true" alt="Admin UserList" width="500"/>
-<img src="https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/adduser.png?raw=true" alt="Admin StoreList" width="500"/>
-<img src="https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/addStore.png?raw=true" alt="Admin StoreList" width="500"/>
+## Features
+
+### System Administrator
+
+**Dashboard:**
+- Total users, stores, and ratings overview
+- Store management with average ratings
+- User management with filtering options
+- Add new stores and users
+
+**Capabilities:**
+- Add/manage stores
+- Add/manage users (Normal/Admin roles)
+- View detailed analytics
+- Sort and filter data
+
+### Normal User
+
+**Features:**
+- User registration and login
+- Password update
+- Store search by name/address
+- View store ratings
+- Submit and modify ratings
+
+**Store Information:**
+- Store name and address
+- Overall rating display
+- Personal rating tracking
+
+### Store Owner
+
+**Dashboard:**
+- View users who rated their store
+- Monitor average store rating
+- Password management
+
+## Screenshots
+
+### Authentication
+![Login](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/login.png?raw=true)
+
+### Admin Dashboard
+![Admin Home](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/adminhome.png?raw=true)
+![User Management](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/userAdminDash.png?raw=true)
+![Add User](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/adduser.png?raw=true)
+![Add Store](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/addStore.png?raw=true)
+![Store List](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/storeListAdmin.png?raw=true)
+
+### User Dashboard
+![User Dashboard](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/UserDash.png?raw=true)
+
+### Store Owner Dashboard
+![Store Dashboard](https://github.com/VaishnaviBarge/Roxiler-Assignment2/blob/main/storeDashboard.png?raw=true)
+
+-For any questions or doubts, please contact: vaishnavibarge0@gmail.com
